@@ -47,10 +47,10 @@ def get_tweets(last_tweet_id):
         access_token_secret=config.settings['twitter_keys']['access_token_secret']
     )
 
-    tweeter_username = config.settings['twitter_filters']['username']
-    response = client.get_user(username=tweeter_username, user_auth=True)
+    twitter_username = config.settings['twitter_filters']['username']
+    response = client.get_user(username=twitter_username, user_auth=True)
     if not response.data:
-        print("User %s not found" % tweeter_username)
+        print("User %s not found" % twitter_username)
         return tweet_results, latest_tweet_id
 
     user_id = response.data.id
@@ -83,5 +83,5 @@ if __name__ == "__main__":
     for tweet in tweets:
         send_email(config.settings['email_settings']['from'], 
             config.settings['email_settings']['to'], 
-            "Tweeter email alert", 
+            "Twitter email alert", 
             tweet)
